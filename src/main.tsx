@@ -1,10 +1,22 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
 import App from './App.tsx'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router';
+import { routesSection } from './routes/sections/index.tsx';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const router = createBrowserRouter([
+  {
+    Component: () => (
+      <App>
+        <Outlet />
+      </App>
+    ),
+    errorElement: <>Error Boundray</>,
+    children: routesSection,
+  },
+]);
+
+const root = createRoot(document.getElementById('root')!);
+
+root.render(
+  <RouterProvider router={router} />
+);
