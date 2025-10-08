@@ -10,6 +10,7 @@ import { NavUl, NavLi, NavCollapse } from '../components';
 import { isActiveLink } from '../utils/is-active-link';
 import { isExternalLink } from '../utils/is-external-link';
 import { usePathname } from '../../../../hooks/routes';
+import { useTranslate } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ export function NavList({
   const isActive = isActiveLink(pathname, data.path, data.deepMatch ?? !!data.children);
 
   const [open, setOpen] = useState<boolean>(isActive)
-
+  const { t } = useTranslate()
   const onClose = () => {
     setOpen(false)
   }
@@ -47,12 +48,14 @@ export function NavList({
   const renderNavItem = () => (
     <NavItem
       ref={navItemRef}
-      sx={{ gap: '10px', padding: ' 5px 10px' }}
+      sx={{
+        p: '5px 0px 5px 20px'
+      }}
       // slots
       path={data.path}
       icon={data.icon}
       info={data.info}
-      title={data.title}
+      title={t(data.title)}
       caption={data.caption}
       // state
       open={open}

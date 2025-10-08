@@ -117,7 +117,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
         anchor="right"
         slotProps={{
           backdrop: { invisible: true },
-          paper: { sx: { width: 320 } },
+          paper: { sx: { width: 320, backgroundColor: "#fff" } },
         }}
       >
         <IconButton

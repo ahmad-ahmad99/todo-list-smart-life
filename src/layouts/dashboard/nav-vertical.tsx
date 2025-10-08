@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 
 import { layoutClasses } from '../core';
 import { NavToggleButton } from '../components/nav-toggle-button';
-import { NavSectionVertical, type NavSectionProps } from '../../components/shared/nav-section';
+import { NavSectionMini, NavSectionVertical, type NavSectionProps } from '../../components/shared/nav-section';
 import clsx from 'clsx';
 import { CONFIG } from '../../global-config';
 import { useAuthContext } from '../../hooks/auth/jwt';
@@ -60,6 +60,31 @@ export function NavVertical({
     </>
   );
 
+  const renderNavMini = () => (
+    <>
+      {slots?.topArea ?? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', py: 2.5 }}>
+        </Box>
+      )}
+
+      <NavSectionMini
+        data={data}
+        cssVars={cssVars}
+        checkPermissions={checkPermissions}
+        sx={[
+          (theme) => ({
+            pb: 2,
+            px: 0.5,
+            flex: '1 1 auto',
+            overflowY: 'auto',
+          }),
+        ]}
+      />
+
+      {slots?.bottomArea}
+    </>
+  );
+
 
   return (
     <NavRoot
@@ -70,7 +95,17 @@ export function NavVertical({
       {...other}
     >
 
-      {renderNavVertical()}
+      <NavToggleButton
+        isNavMini={isNavMini}
+        onClick={onToggleNav}
+        sx={[
+          (theme) => ({
+            display: 'none',
+            [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
+          }),
+        ]}
+      />
+      {isNavMini ? renderNavMini() : renderNavVertical()}
     </NavRoot>
   );
 }
@@ -86,7 +121,6 @@ const NavRoot = styled('div', {
     height: '100%',
     display: 'none',
     minHeight: '40vw',
-    padding: '25px',
     // position: 'fixed',
     flexDirection: 'column',
     zIndex: 'var(--layout-nav-zIndex)',

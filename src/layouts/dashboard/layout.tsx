@@ -21,6 +21,9 @@ import { CONFIG } from '../../global-config';
 import IconButton from '@mui/material/IconButton';
 import { FooterSection } from '../core/footer-section';
 import { Typography } from '@mui/material';
+import { LanguagePopover } from '../../components/shared/language/language-popover';
+import { allLangs, useTranslate } from '../../locales';
+import { useSettingsContext } from '../../context/settings';
 
 // ----------------------------------------------------------------------
 
@@ -45,9 +48,10 @@ export function DashboardLayout({
   layoutQuery = 'lg',
 }: DashboardLayoutProps) {
   const theme = useTheme();
+  const settings = useSettingsContext();
 
-
-
+  const { t, currentLang } = useTranslate()
+  const isNavMini = settings.state.navLayout === 'mini';
 
   const navVars = dashboardNavColorVars(theme);
 
@@ -71,9 +75,17 @@ export function DashboardLayout({
         </StyledIconButton>
 
         {/** @slot translate */}
-        <StyledIconButton>
-          <img src={`${CONFIG.assetsDir}/assets/icons/home/translate.png`} />
-        </StyledIconButton>
+        {/** @slot Language popover */}
+        <LanguagePopover data={allLangs}
+          sx={{
+            backgroundColor: '#F8F8F8',
+            borderRadius: '12px',
+            padding: '12px',
+            border: '1px solid #E5E7EB',
+          }}
+        />
+
+
 
         {/** @slot email */}
         <StyledIconButton>
@@ -143,7 +155,7 @@ export function DashboardLayout({
 
           <RenderIcons />
 
-          {/** @slot Account drawer laptop.png */}
+          {/** @slot Account drawer */}
           <AccountDrawer data={_account} sx={{
             backgroundColor: '#00579F',
             borderRadius: '50%',
@@ -169,10 +181,19 @@ export function DashboardLayout({
   const renderSidebar = () => (
     <NavVertical
       data={navData}
-      isNavMini={false}
+      isNavMini={isNavMini}
       layoutQuery={layoutQuery}
       cssVars={navVars.section}
-      onToggleNav={() => { }
+      sx={{
+        padding: isNavMini ? '10px' : '25px'
+      }}
+      onToggleNav={() => {
+
+        settings.setField(
+          'navLayout',
+          settings.state.navLayout === 'vertical' ? 'mini' : 'vertical'
+        )
+      }
       }
     />
   );
@@ -183,7 +204,7 @@ export function DashboardLayout({
 
       <img src={`${CONFIG.assetsDir}/assets/footerLogo.png`} height={'30px'} />
       <Typography sx={{ color: '#62748E', fontSize: "16px" }} variant='body1' mx={2}>
-        جميع الحقوق محفوظفة لدى
+        {t("copywrite")}
       </Typography>
     </FooterSection>
   );
@@ -213,6 +234,7 @@ export function DashboardLayout({
           [`& .${layoutClasses.sidebarContainer}`]: {
             [theme.breakpoints.up(layoutQuery)]: {
               // pl: 'var(--layout-nav-vertical-width)',
+
               transition: theme.transitions.create(['padding-left'], {
                 easing: 'var(--layout-transition-easing)',
                 duration: 'var(--layout-transition-duration)',

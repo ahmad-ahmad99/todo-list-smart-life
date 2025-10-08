@@ -12,6 +12,7 @@ import { usePathname } from '../../../../hooks/routes';
 import { isActiveLink } from '../utils/is-active-link';
 import { usePopoverHover } from '../../../../hooks/sidbar/use-popover-hover';
 import { isExternalLink } from '../utils/is-external-link';
+import { useTranslate } from '../../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +39,8 @@ export function NavList({
     elementRef: navItemRef,
   } = usePopoverHover<HTMLButtonElement>();
 
+  const { t } = useTranslate()
+
   const isRtl = theme.direction === 'rtl';
   const id = open ? `${data.title}-popover` : undefined;
 
@@ -63,7 +66,7 @@ export function NavList({
       path={data.path}
       icon={data.icon}
       info={data.info}
-      title={data.title}
+      title={t(data.title)}
       caption={data.caption}
       // state
       active={isActive}

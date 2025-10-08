@@ -48,7 +48,7 @@ function verticalVars(theme: Theme) {
     '--nav-item-pb': '4px',
     '--nav-item-pl': '12px',
     // root
-    '--nav-item-root-height': '44px',
+    '--nav-item-root-height': '32px',
     // sub
     '--nav-item-sub-height': '36px',
     // icon
@@ -71,7 +71,7 @@ function miniVars(theme: Theme) {
     '--nav-item-gap': '4px',
     '--nav-item-radius': `${shape.borderRadius}px`,
     // root
-    '--nav-item-root-height': '56px',
+    '--nav-item-root-height': '32px',
     '--nav-item-root-padding': '8px 4px 6px 4px',
     // sub
     '--nav-item-sub-height': '34px',

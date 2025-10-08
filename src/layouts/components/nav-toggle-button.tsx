@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { varAlpha } from '../../utils/style';
 // ----------------------------------------------------------------------
 
 export type NavToggleButtonProps = IconButtonProps & {
@@ -15,15 +16,18 @@ export function NavToggleButton({ isNavMini, sx, ...other }: NavToggleButtonProp
       size="small"
       sx={[
         (theme) => ({
-          p: 0.5,
-          position: 'absolute',
+          p: 1.5,
+          width: '20px',
+          height: '20px',
+          position: 'relative',
           color: 'action.active',
-          bgcolor: 'background.default',
+          bgcolor: '#fff',
           transform: 'translate(-50%, -50%)',
           zIndex: 'var(--layout-nav-zIndex)',
-          top: 'calc(var(--layout-header-desktop-height) / 2)',
-          left: isNavMini ? 'var(--layout-nav-mini-width)' : 'var(--layout-nav-vertical-width)',
-          border: `1px solid ${theme.vars?.palette.grey['500']}`,
+          top: 'calc(var(--layout-header-desktop-height) + 75px)',
+          left: isNavMini
+            ? 'calc(var(--layout-nav-mini-width) - 10px)'
+            : 'calc(var(--layout-nav-vertical-width) - 28px)',
           transition: theme.transitions.create(['left'], {
             easing: 'var(--layout-transition-easing)',
             duration: 'var(--layout-transition-duration)',
