@@ -80,29 +80,16 @@ type HeaderRootProps = Pick<HeaderSectionProps, 'disableOffset' | 'disableElevat
 const HeaderRoot = styled(AppBar, {
   shouldForwardProp: (prop: string) =>
     !['isOffset', 'disableOffset', 'disableElevation', 'sx'].includes(prop),
-})<HeaderRootProps>(({ isOffset, disableOffset, disableElevation, theme }) => {
+})<HeaderRootProps>(({ disableOffset }) => {
   const pauseZindex = { top: -1, bottom: -2 };
-
-  const pauseStyles: CSSObject = {
-    opacity: 0,
-    content: '""',
-    visibility: 'hidden',
-    transition: theme.transitions.create(['opacity', 'visibility'], {
-      easing: theme.transitions.easing.easeInOut,
-      duration: theme.transitions.duration.shorter,
-    }),
-  };
-
   const bgStyles: CSSObject = {
 
-    ...pauseStyles,
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
     zIndex: pauseZindex.top,
 
-    ...(isOffset && { opacity: 1, visibility: 'visible' }),
   };
 
 
@@ -120,6 +107,8 @@ const HeaderContainer = styled(Container, {
   alignItems: 'center',
   color: 'var(--color)',
   height: 'var(--layout-header-mobile-height)',
+  backgroundColor: 'var(--layout-header-bg-color)',
+  borderRadius: 'var(--layout-header-border-radius)',
   [theme.breakpoints.up(layoutQuery)]: { height: 'var(--layout-header-desktop-height)' },
 }));
 

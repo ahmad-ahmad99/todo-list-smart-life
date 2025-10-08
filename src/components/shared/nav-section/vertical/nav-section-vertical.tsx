@@ -63,7 +63,7 @@ function Group({
   const [groupOpen, setGroupOpen] = useState<boolean>(true)
 
   const renderContent = () => (
-    <NavUl sx={{ gap: 'var(--nav-item-gap)', paddingLeft: '20px', paddingTop: '20px' }}>
+    <NavUl sx={{ gap: 'var(--nav-item-gap)', paddingTop: '20px' }}>
       {items.map((list) => (
         <NavList
           key={list.title}

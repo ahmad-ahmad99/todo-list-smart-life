@@ -42,13 +42,11 @@ export function NavVertical({
   const renderNavVertical = () => (
     <>
       {slots?.topArea ?? (
-        <Box sx={{ pl: 2.5, pr: 2, pt: 2.5, pb: 1 }} display={'flex'} justifyContent={"space-between"} alignItems={'center'}>
-          <div>
-            <img src={user?.image} width={"40px"} />
-            <Typography component={"span"} mx={1}>{user?.username}</Typography>
-
-          </div>
-          <img src={`${CONFIG.assetsDir}/assets/icons/home/chart.svg`} width={"40px"} />
+        <Box sx={{ pl: 2.5, pr: 2, pt: 2.5, pb: 2, backgroundColor: "#F8F8F8", border: '1px solid #E5E7EB', borderRadius: 3 }} display={'flex'} justifyContent={"center"} alignItems={'center'} flexDirection={'column'}>
+          <img src={`${CONFIG.assetsDir}/assets/icons/Logo.png`} width={'150px'} />
+          <Typography sx={{ color: '#62748E', fontSize: "16px" }} pt={1}>
+            اسم الشركة سمارت لايف
+          </Typography>
 
         </Box>
       )}
@@ -57,7 +55,7 @@ export function NavVertical({
         data={data}
         cssVars={cssVars}
         checkPermissions={checkPermissions}
-        sx={{ px: 2, flex: '1 1 auto' }}
+        sx={{ flex: '1 1 auto' }}
       />
     </>
   );
@@ -88,6 +86,7 @@ const NavRoot = styled('div', {
     height: '100%',
     display: 'none',
     minHeight: '40vw',
+    padding: '25px',
     // position: 'fixed',
     flexDirection: 'column',
     zIndex: 'var(--layout-nav-zIndex)',

@@ -60,8 +60,8 @@ export function NavMobile({
       }}
     >
       {slots?.topArea ?? (
-        <Box sx={{ pl: 3.5, pt: 2.5, pb: 1 }}>
-          <img src={`${CONFIG.assetsDir}/assets/icons/Logo.png`} />
+        <Box sx={{ pt: 2.5, pb: 1, textAlign: 'center' }}>
+          <img src={`${CONFIG.assetsDir}/assets/icons/Logo.png`} width={"120px"} />
         </Box>
       )}
 

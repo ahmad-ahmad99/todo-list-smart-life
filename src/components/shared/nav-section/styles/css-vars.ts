@@ -15,10 +15,10 @@ function colorVars(theme: Theme, variant?: 'vertical' | 'mini' | 'horizontal') {
     '--nav-item-hover-bg': palette.action.hover,
     '--nav-item-caption-color': palette.text.disabled,
     // root
-    '--nav-item-root-active-color': palette.primary.main,
+    '--nav-item-root-active-color': "#fff",
     '--nav-item-root-active-color-on-dark': palette.primary.light,
-    '--nav-item-root-active-bg': "#f5f6fa",
-    '--nav-item-root-active-hover-bg': palette.primary,
+    '--nav-item-root-active-bg': "#00579F",
+    '--nav-item-root-active-hover-bg': '#00579F',
     '--nav-item-root-open-color': palette.text.primary,
     '--nav-item-root-open-bg': palette.action.hover,
     // sub

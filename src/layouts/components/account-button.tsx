@@ -4,6 +4,7 @@ import type { IconButtonProps } from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import { CONFIG } from '../../global-config';
+import { useAuthContext } from '../../hooks/auth/jwt';
 
 
 // ----------------------------------------------------------------------
@@ -14,15 +15,20 @@ export type AccountButtonProps = IconButtonProps & {
 };
 
 export function AccountButton({ photoURL, displayName, sx, ...other }: AccountButtonProps) {
+  const { user } = useAuthContext();
+
   return (
     <IconButton
 
       aria-label="Account button"
-      sx={[{ p: 0, width: "40px", height: '40px', backgroundColor: "#fff" }, ...(Array.isArray(sx) ? sx : [sx])]}
+      sx={[{ backgroundColor: "#fff" }, ...(Array.isArray(sx) ? sx : [sx])]}
       {...other}
     >
 
-      <img src={`${CONFIG.assetsDir}/assets/icons/home/ic_user.svg`} width={"22px"} />
+
+      <Avatar alt={user?.username ?? ''} sx={{ backgroundColor: 'transparent' }}>
+        {user?.username && user?.username?.charAt(0).toUpperCase()}
+      </Avatar>
 
     </IconButton>
   );

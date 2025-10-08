@@ -17,6 +17,6 @@ export const paths = {
     // DASHBOARD
     dashboard: {
         root: ROOTS.DASHBOARD,
-        services: `/kanban-board`
+        kanban: `/kanban-board`
     },
 };

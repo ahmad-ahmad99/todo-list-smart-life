@@ -4,7 +4,7 @@ import type { MainSectionProps, HeaderSectionProps, LayoutSectionProps } from '.
 
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 
 
 import { NavMobile } from './nav-mobile';
@@ -19,6 +19,8 @@ import type { NavSectionProps } from '../../components/shared/nav-section';
 import { useState } from 'react';
 import { CONFIG } from '../../global-config';
 import IconButton from '@mui/material/IconButton';
+import { FooterSection } from '../core/footer-section';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -60,7 +62,46 @@ export function DashboardLayout({
 
   const isNavVertical = true;
 
+  const RenderIcons = () => {
+    return (
+      <>
+        {/** @slot Notifications*/}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/notification.png`} />
+        </StyledIconButton>
 
+        {/** @slot translate */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/translate.png`} />
+        </StyledIconButton>
+
+        {/** @slot email */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/email.png`} />
+        </StyledIconButton>
+
+        {/** @slot file-text */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/file-text.png`} />
+        </StyledIconButton>
+
+        {/** @slot calculator */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/calculator.png`} />
+        </StyledIconButton>
+
+        {/** @slot  cpu-setting */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/cpu-setting.png`} />
+        </StyledIconButton>
+
+        {/** @slot  laptop */}
+        <StyledIconButton>
+          <img src={`${CONFIG.assetsDir}/assets/icons/home/laptop.png`} />
+        </StyledIconButton>
+      </>
+    )
+  }
   const renderHeader = () => {
 
 
@@ -79,30 +120,37 @@ export function DashboardLayout({
             open={open}
             onClose={onClose}
             cssVars={navVars.section}
+            slots={
+              {
+                bottomArea: <>
+                  <Box sx={{
+                    display: 'flex', alignItems: 'center', gap: 1, flexWrap: "wrap", p: 2
+                  }}>
+
+                    <RenderIcons />
+                  </Box>
+                </>
+              }
+            }
           />
-          <img src={`${CONFIG.assetsDir}/assets/icons/Logo.png`} width={220} />
         </>
       ),
       rightArea: (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 2 } }}>
+        <Box sx={{
+          display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 2 },
+          [theme.breakpoints.down(layoutQuery)]: { display: 'none' }
+        }}>
 
-          {/** @slot messages */}
-          <IconButton
-            sx={{ backgroundColor: "#fff", borderRadius: "50%", width: "40px", height: "40px" }}
-            aria-label="Account button"
-          >
-            <img src={`${CONFIG.assetsDir}/assets/icons/home/ic_chat.svg`} width={"30px"} />
-          </IconButton>
-          {/** @slot Notifications */}
-          <IconButton
-            sx={{ backgroundColor: "#fff", borderRadius: "50%", width: "40px", height: "40px" }}
-            aria-label="Account button"
-          >
-            <img src={`${CONFIG.assetsDir}/assets/icons/home/notification.png`} width={"30px"} />
+          <RenderIcons />
 
-          </IconButton>
-          {/** @slot Account drawer */}
-          <AccountDrawer data={_account} />
+          {/** @slot Account drawer laptop.png */}
+          <AccountDrawer data={_account} sx={{
+            backgroundColor: '#00579F',
+            borderRadius: '50%',
+            padding: '12px',
+            width: '50px',
+            height: '50px'
+          }} />
         </Box>
       ),
     };
@@ -129,7 +177,16 @@ export function DashboardLayout({
     />
   );
 
-  const renderFooter = () => null;
+  const renderFooter = () => (
+
+    <FooterSection>
+
+      <img src={`${CONFIG.assetsDir}/assets/footerLogo.png`} height={'30px'} />
+      <Typography sx={{ color: '#62748E', fontSize: "16px" }} variant='body1' mx={2}>
+        جميع الحقوق محفوظفة لدى
+      </Typography>
+    </FooterSection>
+  );
 
   const renderMain = () => <MainSection {...slotProps?.main}>{children}</MainSection>;
 
@@ -162,6 +219,8 @@ export function DashboardLayout({
               }),
             },
           },
+          width: '100%'
+
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
@@ -170,3 +229,18 @@ export function DashboardLayout({
     </LayoutSection>
   );
 }
+
+
+export const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: '#F8F8F8',
+  borderRadius: '12px',
+  padding: '12px',
+  border: '1px solid #E5E7EB',
+  '&:hover': {
+    backgroundColor: '#F0F0F0',
+  },
+  '&:focus': {
+    outline: 'none',
+    boxShadow: `0 0 0 2px ${theme.palette.primary.main}33`,
+  },
+}));

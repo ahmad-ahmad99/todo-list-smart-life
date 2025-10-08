@@ -47,17 +47,20 @@ export function LayoutSection({
         >
           {sidebarSection ? (
             <>
-              {headerSection}
 
               <LayoutSidebarContainer className={layoutClasses.sidebarContainer}>
-                <Box display={"flex"} gap={10}>
+                <Box display={"flex"} gap={5}>
                   {sidebarSection}
+                  <Box flex={1} display={"flex"} flexDirection={'column'}>
+                    {headerSection}
 
-                  {children}
+                    {children}
+                    {footerSection}
+
+                  </Box>
                 </Box>
 
 
-                {footerSection}
               </LayoutSidebarContainer>
             </>
           ) : (
