@@ -15,6 +15,7 @@ import {
   BreadcrumbsContainer,
   BreadcrumbsSeparator,
 } from './styles';
+import { useTranslate } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -55,6 +56,8 @@ export function CustomBreadcrumbs({
   ...other
 }: CustomBreadcrumbsProps) {
   const lastLink = links[links.length - 1]?.name;
+  const { currentLang } = useTranslate()
+  console.log("currentLang", currentLang);
 
   const renderHeading = () => (
     <BreadcrumbsHeading {...slotProps?.heading}>
@@ -64,7 +67,16 @@ export function CustomBreadcrumbs({
 
   const renderLinks = () =>
     slots?.breadcrumbs ?? (
-      <Breadcrumbs separator={<BreadcrumbsSeparator />} {...slotProps?.breadcrumbs}>
+      <Breadcrumbs  {...slotProps?.breadcrumbs} sx={{
+        alignItems: 'center',
+        gap: 4,
+        '.MuiBreadcrumbs-separator': {
+          display: 'none'
+        },
+        '.MuiBreadcrumbs-ol': {
+          gap: '12px'
+        }
+      }}>
         {links.map((link, index) => (
           <BreadcrumbsLink
             key={link.name ?? index}
@@ -72,6 +84,16 @@ export function CustomBreadcrumbs({
             href={link.href}
             name={link.name}
             disabled={link.name === lastLink && !activeLast}
+            sx={{
+              color: link.name === lastLink ? "#00579F" : '#4D637C',
+              fontSize: '16px',
+
+              ".MuiSvgIcon-root": {
+                transform: currentLang?.value == 'ar' ? "rotate(180deg)" : "inherit",
+                fontSize: '20px',
+
+              }
+            }}
           />
         ))}
       </Breadcrumbs>
@@ -83,9 +105,10 @@ export function CustomBreadcrumbs({
     <BreadcrumbsRoot sx={{ ...sx, mb: 0 }} {...other}>
       <BreadcrumbsContainer
         {...slotProps?.container}
+
         sx={{ display: 'flex', alignItems: 'center' }}
       >
-        <BreadcrumbsContent {...slotProps?.content}>
+        <BreadcrumbsContent {...slotProps?.content} >
           {(heading || backHref) && renderHeading()}
           {(!!links.length || slots?.breadcrumbs) && renderLinks()}
         </BreadcrumbsContent>

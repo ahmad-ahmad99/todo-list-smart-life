@@ -1,6 +1,6 @@
 import { Container, styled, type Breakpoint } from "@mui/material";
 import type { ReactNode } from "react";
-import { getCurrentLang } from "../../locales";
+import { useTranslate } from "../../locales";
 
 
 
@@ -12,9 +12,10 @@ interface FooterSectionProps {
 
 
 export function FooterSection({ children }: FooterSectionProps) {
+    const { currentLang } = useTranslate()
     return (
         <FooterContainer>
-            <FooterCenterArea sx={{ flexDirection: getCurrentLang().value === 'ar' ? 'row-reverse' : 'inherit' }}>
+            <FooterCenterArea sx={{ flexDirection: currentLang.value === 'ar' ? 'row-reverse' : 'inherit' }}>
                 {children}
             </FooterCenterArea>
         </FooterContainer>

@@ -27,6 +27,7 @@ body,
   margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #f5f6fa;
+  overflow: 'hidden'
 }
 img {
   max-width: 100%;

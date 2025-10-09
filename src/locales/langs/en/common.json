@@ -6,7 +6,15 @@
     "sidebar":{
     "home":"Home"
   },
-    "copywrite":"All rights reserved by"
-
+  "copywrite":"All rights reserved by",
+  "taskManagement":"Tasks Management",
+  "tasks":"Tasks",
+  "employmentRequests":"Employment Requests",
+  "cancel": "Cancel",
+  "save": "Save",
+  "description":"Description",
+  "title":"Title",
+  "addTask":"Add Task",
+  "addColumn":"Add Column"
 
 }

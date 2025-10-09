@@ -47,20 +47,15 @@ export function LayoutSection({
         >
           {sidebarSection ? (
             <>
-
               <LayoutSidebarContainer className={layoutClasses.sidebarContainer}>
                 <Box display={"flex"} gap={5}>
                   {sidebarSection}
                   <Box flex={1} display={"flex"} flexDirection={'column'}>
                     {headerSection}
-
                     {children}
                     {footerSection}
-
                   </Box>
                 </Box>
-
-
               </LayoutSidebarContainer>
             </>
           ) : (
@@ -72,7 +67,6 @@ export function LayoutSection({
           )}
         </LayoutRoot>
       </DashboardContent>
-
     </>
   );
 }
@@ -85,5 +79,4 @@ const LayoutSidebarContainer = styled('div')(() => ({
   display: 'flex',
   flex: '1 1 auto',
   flexDirection: 'column',
-
 }));
