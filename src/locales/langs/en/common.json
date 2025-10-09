@@ -23,6 +23,7 @@
   "password":"Password",
   "forgotPassword":"Forgot Password",
   "remember":"Remember me",
-  "welcome": "Welcom back! Please login to your account"
+  "welcome": "Welcom back! Please login to your account",
+  "noTask":"No Tasks"
 
 }

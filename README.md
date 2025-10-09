@@ -2,72 +2,73 @@
 
 This template provides setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 📝 Todo List App with Auth
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A modern, drag-and-drop enabled Todo List application built with **React**, **TypeScript**, and **MUI**. Includes authentication via JWT and full task management features.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🔐 Authentication
 
-## Expanding the ESLint configuration
+This app uses [DummyJSON Auth API](https://dummyjson.com/docs/auth) for JWT-based authentication.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+You can log in using the following credentials:
+Username: emilys
+Password: emilyspass
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ✨ Features
+
+- ✅ **Login with JWT** (via DummyJSON)
+- 🗂️ **Add, edit, and delete tasks**
+- ➕ **Create new columns**
+- 🔄 **Drag and drop tasks between columns** (powered by [`@dnd-kit`](https://github.com/clauderic/dnd-kit))
+- ↕️ **Sortable tasks within the same column**
+- 🎨 **Responsive UI** built with [MUI](https://mui.com/)
+- 🧠 **Type-safe architecture** using TypeScript
+
+---
+
+## 🧭 Routing & Sidebar Navigation
+
+To add a new page or route:
+
+### 1. Define the path in `paths.ts`
+
+```ts
+export const paths = {
+
+  newFeature: '/new-feature', 
+};
+```
+### 2. Add the link to the sidebar in `nav-config-dashboard.tsx`
+
+```ts
+{
+  title: 'New Feature',
+  path: paths.newFeature,
+  icon: <SvgIcon src="/assets/icons/navbar/new-feature.svg" />,
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Add the page to the link in `route/sections/dashboard.tsx`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Tech Stack
+
+- **React.js**
+- **TypeScript**
+- **MUI (Material UI)**
+- **@dnd-kit** for drag-and-drop
+- **DummyJSON** for mock authentication
+- **axios** for API
+---
+
+## 📦 Getting Started
+
+```bash
+npm install
+npm run dev
+

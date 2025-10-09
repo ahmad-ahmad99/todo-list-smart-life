@@ -180,9 +180,6 @@ export function KanbanBoardView() {
                             </div>
                         </Box>
                     </Box>
-
-
-
                 </>
             </Box>
         </>

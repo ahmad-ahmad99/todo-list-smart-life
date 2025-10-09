@@ -118,7 +118,7 @@ const NavRoot = styled('div', {
     left: 0,
     height: '100%',
     display: 'none',
-    minHeight: '40vw',
+    minHeight: '44vw',
     // position: 'fixed',
     flexDirection: 'column',
     zIndex: 'var(--layout-nav-zIndex)',

@@ -166,47 +166,24 @@ export function JwtSignInView() {
                     }}
                 />
             </Box>
-            <Box sx={{ gap: 1.5, display: 'flex', justifyContent: "space-between", alignItems: 'center' }}>
 
-
-                <FormControlLabel control={<Checkbox size='small' sx={{ outlineOffset: 2, }} />} label={t('remember')} sx={{ color: "#6c6c81" }} />
-                <Link
-                    component={RouterLink}
-                    href="#"
-                    variant='body1'
-                    sx={{ textDecoration: "none", color: "#6c6c81", fontSize: "16px" }}
-                >
-                    {t('forgotPassword')}
-                </Link>
-            </Box>
             <Box sx={{ gap: 3, display: 'flex', justifyContent: "space-between", alignItems: 'center', mt: 3 }}>
-                <Button
-                    fullWidth
-                    color="primary"
-                    size="large"
-                    variant="outlined"
-                    loadingIndicator="Register..."
-                    sx={{ borderColor: "#3b86ff", color: "#3b86ff", borderRadius: 2, boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px" }}
-                >
 
-                    {t('register')}
-                </Button>
                 <Button
                     fullWidth
                     color="primary"
                     size="large"
                     type="submit"
-                    variant="contained"
+                    variant="outlined"
                     loading={isSubmitting}
                     loadingIndicator="Login..."
-                    sx={{ backgroundColor: "#3b86ff", borderRadius: 2, boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px" }}
-
+                    sx={{ borderRadius: 2, boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px" }}
                 >
                     {t('login')}
                 </Button>
             </Box>
 
-        </Box>
+        </Box >
     );
 
     return (

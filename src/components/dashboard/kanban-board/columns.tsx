@@ -77,6 +77,12 @@ export const ColumnView: React.FC<Props> = ({
                         isDragging={task.id === activeTask?.id}
                     />
                 ))}
+                {column.tasks.length === 0 && (
+                    <Typography sx={{ fontSmooth: '18px', px: 1, mb: 1, fontFamily: "ExpoArabicLight", color: "#4D637C" }}>
+                        {t('noTask')}
+                    </Typography>
+
+                )}
             </SortableContext>
 
             {isAdding ? (
