@@ -69,18 +69,19 @@ export function KanbanBoardView() {
                     borderRadius: 1,
                     mt: 8,
                     mr: 1,
-
                     pt: 1,
                     pb: 1,
                     pl: 2.5,
                     pr: 2.5,
                     position: 'absolute',
                     overflow: 'hidden',
-                    width: "-webkit-fill-available"
+                    width: "-webkit-fill-available",
                 }} >
                 <>
                     <Grid container justifyContent={"space-between"} pb={1} alignItems={"center"} borderBottom={"2px solid #f8f8f8"} >
-                        <Typography sx={{ color: "#535862", fontSize: "16px" }}>
+                        <Typography sx={{
+                            color: "#535862", fontSize: "16px", fontFamily: "ExpoArabicMedium",
+                        }}>
                             {t('employmentRequests')}
                         </Typography>
 

@@ -62,7 +62,7 @@ export const ColumnView: React.FC<Props> = ({
                 backgroundColor: "#F6F7F9",
                 height: 'fit-content'
             }}>
-            <Typography sx={{ fontSmooth: '18px', px: 1, mb: 1, fontWeight: 500 }}>{column.name} {`(${column.tasks.length})`}</Typography>
+            <Typography sx={{ fontSmooth: '18px', px: 1, mb: 1, fontFamily: "ExpoArabicBold", color: "#4D637C" }}>{column.name} <span style={{ color: "#374555" }}>{`(${column.tasks.length})`}</span></Typography>
             <SortableContext
                 items={column.tasks.map(task => task.id)}
                 strategy={verticalListSortingStrategy}

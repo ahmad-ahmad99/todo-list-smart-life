@@ -9,6 +9,31 @@
 @import '@fontsource/roboto/700.css';
 
 /** **************************************
+* Fonts: Arabic
+*************************************** */
+@font-face {
+  font-family: 'ExpoArabicMedium';
+  src: url('/fonts/Expo Arabic Medium.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ExpoArabicLight';
+  src: url('/fonts/Expo Arabic Light.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ExpoArabicBold';
+  src: url('/fonts/Expo Arabic Bold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+/** **************************************
 * Baseline
 *************************************** */
 html {
