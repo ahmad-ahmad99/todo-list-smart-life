@@ -5,13 +5,16 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { ActionButtons } from "./action-buttons";
 import { useTranslate } from "../../../locales";
 import { CONFIG } from "../../../global-config";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { useDroppable } from "@dnd-kit/core";
 
 type Props = {
     column: Column;
     onAddTask: (columnId: string, task: Task) => void;
     onEditTask: (columnId: string, task: Task) => void;
     onDeleteTask: (columnId: string, taskId: string) => void;
-    disabled?: boolean
+    activeTask?: Task | null
+
 };
 
 export const ColumnView: React.FC<Props> = ({
@@ -19,12 +22,13 @@ export const ColumnView: React.FC<Props> = ({
     onAddTask,
     onEditTask,
     onDeleteTask,
-    disabled
+    activeTask
 }) => {
     const { t } = useTranslate()
     const [isAdding, setIsAdding] = useState(false);
     const [newTitle, setNewTitle] = useState("");
     const [newDescription, setNewDescription] = useState("");
+    const { setNodeRef } = useDroppable({ id: column.id });
 
     const handleSubmit = () => {
         if (newTitle.trim()) {
@@ -41,32 +45,39 @@ export const ColumnView: React.FC<Props> = ({
     };
 
     return (
-        <Box sx={{
-            width: "300px",
-            flexShrink: 0,
-            boxSizing: "border-box",
-            position: 'relative',
-            display: "flex",
-            flexDirection: 'column',
-            gap: 1,
-            p: 1,
-            pb: 2,
-            pt: 3,
-            borderRadius: 2,
-            backgroundColor: "#F6F7F9",
-            height: 'fit-content'
-        }}>
+        <Box
+            ref={setNodeRef}
+            sx={{
+                minWidth: "300px",
+                flexShrink: 0,
+                boxSizing: "border-box",
+                position: 'relative',
+                display: "flex",
+                flexDirection: 'column',
+                gap: 1,
+                p: 1,
+                pb: 2,
+                pt: 3,
+                borderRadius: 2,
+                backgroundColor: "#F6F7F9",
+                height: 'fit-content'
+            }}>
             <Typography sx={{ fontSmooth: '18px', px: 1, mb: 1, fontWeight: 500 }}>{column.name} {`(${column.tasks.length})`}</Typography>
+            <SortableContext
+                items={column.tasks.map(task => task.id)}
+                strategy={verticalListSortingStrategy}
+            >
 
-            {column.tasks.map((task) => (
-                <TaskCard
-                    key={task.id}
-                    task={task}
-                    onEdit={(task) => onEditTask(column.id, task)}
-                    onDelete={(id) => onDeleteTask(column.id, id)}
-                    disabled={disabled}
-                />
-            ))}
+                {column.tasks.map((task) => (
+                    <TaskCard
+                        key={task.id}
+                        task={task}
+                        onEdit={(task) => onEditTask(column.id, task)}
+                        onDelete={(id) => onDeleteTask(column.id, id)}
+                        isDragging={task.id === activeTask?.id}
+                    />
+                ))}
+            </SortableContext>
 
             {isAdding ? (
                 <div style={{ border: "1px solid #ccc", padding: "8px", marginBottom: "8px", borderRadius: "4px" }}>

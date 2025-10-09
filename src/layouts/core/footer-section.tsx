@@ -1,8 +1,6 @@
-import { Container, styled, type Breakpoint } from "@mui/material";
+import { Box, styled, type Breakpoint } from "@mui/material";
 import type { ReactNode } from "react";
 import { useTranslate } from "../../locales";
-
-
 
 interface FooterSectionProps {
     layoutQuery?: Breakpoint;
@@ -10,11 +8,10 @@ interface FooterSectionProps {
 
 }
 
-
 export function FooterSection({ children }: FooterSectionProps) {
     const { currentLang } = useTranslate()
     return (
-        <FooterContainer>
+        <FooterContainer >
             <FooterCenterArea sx={{ flexDirection: currentLang.value === 'ar' ? 'row-reverse' : 'inherit' }}>
                 {children}
             </FooterCenterArea>
@@ -24,10 +21,10 @@ export function FooterSection({ children }: FooterSectionProps) {
 }
 
 
-const FooterContainer = styled(Container, {
+const FooterContainer = styled(Box, {
     shouldForwardProp: (prop: string) => !['layoutQuery', 'sx'].includes(prop),
 })<Pick<FooterSectionProps, 'layoutQuery'>>(({ layoutQuery = 'md', theme }) => ({
-    display: 'flex',
+    display: 'none',
     alignItems: 'center',
     color: 'var(--color)',
     height: 'var(--layout-footer-mobile-height)',
@@ -35,6 +32,8 @@ const FooterContainer = styled(Container, {
     borderRadius: 'var(--layout-footer-border-radius)',
     [theme.breakpoints.up(layoutQuery)]: {
         height: 'var(--layout-footer-desktop-height)',
+        display: 'flex',
+
     },
 }));
 

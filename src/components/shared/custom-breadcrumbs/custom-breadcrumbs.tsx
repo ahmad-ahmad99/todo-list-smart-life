@@ -13,7 +13,6 @@ import {
   BreadcrumbsHeading,
   BreadcrumbsContent,
   BreadcrumbsContainer,
-  BreadcrumbsSeparator,
 } from './styles';
 import { useTranslate } from '../../../locales';
 
@@ -57,7 +56,6 @@ export function CustomBreadcrumbs({
 }: CustomBreadcrumbsProps) {
   const lastLink = links[links.length - 1]?.name;
   const { currentLang } = useTranslate()
-  console.log("currentLang", currentLang);
 
   const renderHeading = () => (
     <BreadcrumbsHeading {...slotProps?.heading}>

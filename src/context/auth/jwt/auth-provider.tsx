@@ -23,7 +23,6 @@ export function AuthProvider({ children }: Props) {
 
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
-        console.log('accessToken', accessToken);
 
         //you can make call api for get current user 
         // const res = await axios.get(endpoints.auth.me);

@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import type { Task } from "./types";
-import { Box, Button, Grid, IconButton, Menu, MenuItem, TextField, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Menu, MenuItem, TextField, Typography } from "@mui/material";
 import { useTranslate } from "../../../locales";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ActionButtons } from "./action-buttons";
 import { useTask } from "./use-task";
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 type Props = {
     task: Task;
     onEdit: (updated: Task) => void;
     onDelete: (id: string) => void;
-    disabled?: boolean;
-
+    isDragging?: boolean
 };
 
-export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete }) => {
+export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete, isDragging }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task.id });
+
     const {
         anchorEl,
         isEditing,
@@ -39,7 +42,27 @@ export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete }) => {
     };
 
     return (
-        <Box sx={{ border: "1px solid #EBEEF3", backgroundColor: "#fff", padding: 1, marginBottom: "0px", borderRadius: '10px' }}>
+        <Box
+            ref={setNodeRef}
+            {...attributes}
+            {...listeners}
+            sx={{
+                border: "1px solid #EBEEF3",
+                backgroundColor: "#fff",
+                padding: 1,
+                marginBottom: "0px",
+                borderRadius: '10px',
+                transform: CSS.Transform.toString(transform),
+                transition,
+                opacity: isDragging ? 0.8 : 1,
+                boxShadow: isDragging ? 4 : 0,
+                zIndex: isDragging ? 12 : 'inherit',
+                touchAction: 'none', //  allows drag gestures
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+            }}>
+
+
             {isEditing ? (
                 <>
                     <TextField
@@ -66,20 +89,16 @@ export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete }) => {
                         onCancel={() => {
                             handleClose();
                             setIsEditing(false)
-                            setTitle('')
-                            setDescription('')
                         }}
                         onSave={() => {
                             handleClose();
                             handleSave()
-                            setTitle('')
-                            setDescription('')
                         }}
                     />
                 </>
             ) : (
                 <>
-                    <Grid container alignItems={'start'} justifyContent={'space-between'}>
+                    <Grid container alignItems={'start'} justifyContent={'space-between'} >
                         <Grid flex={1}>
                             <Typography variant="h6" sx={{ fontSize: '16px', color: "#374555" }}>{task.title}</Typography>
                             <Typography variant="body1" sx={{ color: "#8198AF" }}>{task.description}</Typography>
@@ -92,6 +111,7 @@ export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete }) => {
                             aria-haspopup="true"
                             sx={{ p: 1, px: 0.5 }}
                             onClick={handleClick}
+                            disabled={isDragging}
                         >
                             <MoreVertIcon />
                         </IconButton>
@@ -101,17 +121,22 @@ export const TaskCard: React.FC<Props> = ({ task, onEdit, onDelete }) => {
                             onClose={handleClose}
                             sx={{
                                 '& .MuiPaper-root': {
-                                    backgroundColor: "#fff"
+                                    backgroundColor: "#fff",
                                 }
                             }}
                         >
-                            <MenuItem onClick={() => setIsEditing(true)}>
-                                <IconButton >
+                            <MenuItem
+                                onClick={() => setIsEditing(true)}
+                                onPointerDown={(e) => e.stopPropagation()}
+                            >
+                                <IconButton>
                                     <EditIcon color="primary" sx={{ color: "#00579f" }} />
                                 </IconButton>
 
                             </MenuItem>
-                            <MenuItem onClick={() => onDelete(task.id)}>
+                            <MenuItem
+                                onClick={() => onDelete(task.id)}
+                            >
                                 <IconButton>
                                     <DeleteIcon sx={{ color: "red" }} />
                                 </IconButton>

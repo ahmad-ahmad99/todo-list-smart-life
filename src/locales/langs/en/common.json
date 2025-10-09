@@ -15,6 +15,14 @@
   "description":"Description",
   "title":"Title",
   "addTask":"Add Task",
-  "addColumn":"Add Column"
+  "addColumn":"Add Column",
+  "logout":"Logout",
+  "login":"Login",
+  "register":"Register",
+  "username":"Username",
+  "password":"Password",
+  "forgotPassword":"Forgot Password",
+  "remember":"Remember me",
+  "welcome": "Welcom back! Please login to your account"
 
 }

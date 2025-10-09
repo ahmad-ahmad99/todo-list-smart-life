@@ -21,12 +21,12 @@ export function AccountButton({ photoURL, displayName, sx, ...other }: AccountBu
     <IconButton
 
       aria-label="Account button"
-      sx={[{ backgroundColor: "#fff" }, ...(Array.isArray(sx) ? sx : [sx])]}
+      sx={[...(Array.isArray(sx) ? sx : [sx])]}
       {...other}
     >
 
 
-      <Avatar alt={user?.username ?? ''} sx={{ backgroundColor: 'transparent' }}>
+      <Avatar alt={user?.username ?? ''} sx={{ backgroundColor: 'transparent', color: "#fff" }}>
         {user?.username && user?.username?.charAt(0).toUpperCase()}
       </Avatar>
 

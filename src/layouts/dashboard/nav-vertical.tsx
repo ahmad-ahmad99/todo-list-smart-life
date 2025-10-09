@@ -10,7 +10,6 @@ import { NavToggleButton } from '../components/nav-toggle-button';
 import { NavSectionMini, NavSectionVertical, type NavSectionProps } from '../../components/shared/nav-section';
 import clsx from 'clsx';
 import { CONFIG } from '../../global-config';
-import { useAuthContext } from '../../hooks/auth/jwt';
 import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
@@ -38,7 +37,6 @@ export function NavVertical({
   layoutQuery = 'md',
   ...other
 }: NavVerticalProps) {
-  const { user } = useAuthContext()
   const renderNavVertical = () => (
     <>
       {slots?.topArea ?? (
@@ -63,8 +61,7 @@ export function NavVertical({
   const renderNavMini = () => (
     <>
       {slots?.topArea ?? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 2.5 }}>
-        </Box>
+        <></>
       )}
 
       <NavSectionMini
@@ -74,6 +71,7 @@ export function NavVertical({
         sx={[
           (theme) => ({
             pb: 2,
+            pt: 0,
             px: 0.5,
             flex: '1 1 auto',
             overflowY: 'auto',

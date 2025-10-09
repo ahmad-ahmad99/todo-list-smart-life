@@ -42,7 +42,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
 
   const renderAvatar = () => (
 
-    <Avatar src={user?.image ?? ''} alt={user?.username ?? ''} sx={{ width: '96px', height: '96px' }}>
+    <Avatar src={user?.image ?? ''} alt={user?.username ?? ''} sx={{ color: "#fff", backgroundColor: "#00579f", width: '96px', height: '96px' }}>
       {user?.username && user?.username?.charAt(0).toUpperCase()}
     </Avatar>
   );

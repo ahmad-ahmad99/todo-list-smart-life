@@ -37,36 +37,36 @@ export function LayoutSection({
   return (
     <>
       {inputGlobalStyles}
-      <DashboardContent maxWidth="xl">
-        <LayoutRoot
-          id="root__layout"
-          className={clsx([layoutClasses.root, className])}
-          sx={sx}
+      {/* <DashboardContent maxWidth="xl" layoutQuery='xl'> */}
+      <LayoutRoot
+        id="root__layout"
+        className={clsx([layoutClasses.root, className])}
+        sx={sx}
 
-          {...other}
-        >
-          {sidebarSection ? (
-            <>
-              <LayoutSidebarContainer className={layoutClasses.sidebarContainer}>
-                <Box display={"flex"} gap={5}>
-                  {sidebarSection}
-                  <Box flex={1} display={"flex"} flexDirection={'column'}>
-                    {headerSection}
-                    {children}
-                    {footerSection}
-                  </Box>
+        {...other}
+      >
+        {sidebarSection ? (
+          <>
+            <LayoutSidebarContainer className={layoutClasses.sidebarContainer}>
+              <Box display={"flex"} gap={5}>
+                {sidebarSection}
+                <Box flex={1} display={"flex"} flexDirection={'column'}>
+                  {headerSection}
+                  {children}
+                  {footerSection}
                 </Box>
-              </LayoutSidebarContainer>
-            </>
-          ) : (
-            <>
-              {headerSection}
-              {children}
-              {footerSection}
-            </>
-          )}
-        </LayoutRoot>
-      </DashboardContent>
+              </Box>
+            </LayoutSidebarContainer>
+          </>
+        ) : (
+          <>
+            {headerSection}
+            {children}
+            {footerSection}
+          </>
+        )}
+      </LayoutRoot>
+      {/* </DashboardContent> */}
     </>
   );
 }

@@ -5,10 +5,10 @@ import type { Theme, SxProps, CSSObject, Breakpoint } from '@mui/material/styles
 
 import AppBar from '@mui/material/AppBar';
 import { styled } from '@mui/material/styles';
-import Container from '@mui/material/Container';
 
 import { layoutClasses } from './classes';
 import clsx from 'clsx'
+import { Box } from '@mui/material';
 // ----------------------------------------------------------------------
 
 export type HeaderSectionProps = AppBarProps & {
@@ -51,14 +51,13 @@ export function HeaderSection({
       className={clsx([layoutClasses.header, className])}
       style={{ boxShadow: 'none', }}
       sx={[
-
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       {...other}
     >
       {slots?.topArea}
 
-      <HeaderContainer layoutQuery={layoutQuery} {...slotProps?.container} maxWidth="xl">
+      <HeaderContainer layoutQuery={layoutQuery} {...slotProps?.container} maxWidth={"100%"} p={4}>
         {slots?.leftArea}
 
         <HeaderCenterArea {...slotProps?.centerArea}>{slots?.centerArea}</HeaderCenterArea>
@@ -92,15 +91,13 @@ const HeaderRoot = styled(AppBar, {
 
   };
 
-
-
   return {
     zIndex: 'var(--layout-header-zIndex)',
     ...(!disableOffset && { '&::before': bgStyles }),
   };
 });
 
-const HeaderContainer = styled(Container, {
+const HeaderContainer = styled(Box, {
   shouldForwardProp: (prop: string) => !['layoutQuery', 'sx'].includes(prop),
 })<Pick<HeaderSectionProps, 'layoutQuery'>>(({ layoutQuery = 'md', theme }) => ({
   display: 'flex',

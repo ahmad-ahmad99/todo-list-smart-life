@@ -24,7 +24,7 @@ function SuspenseOutlet() {
 }
 
 const dashboardLayout = () => (
-    <DashboardLayout >
+    <DashboardLayout>
         <SuspenseOutlet />
     </DashboardLayout>
 );

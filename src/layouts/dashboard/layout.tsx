@@ -3,10 +3,7 @@ import type { MainSectionProps, HeaderSectionProps, LayoutSectionProps } from '.
 
 
 import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
 import { styled, useTheme } from '@mui/material/styles';
-
-
 import { NavMobile } from './nav-mobile';
 import { NavVertical } from './nav-vertical';
 import { _account } from '../nav-config-account';
@@ -50,7 +47,7 @@ export function DashboardLayout({
   const theme = useTheme();
   const settings = useSettingsContext();
 
-  const { t, currentLang } = useTranslate()
+  const { t } = useTranslate()
   const isNavMini = settings.state.navLayout === 'mini';
 
   const navVars = dashboardNavColorVars(theme);
@@ -149,20 +146,28 @@ export function DashboardLayout({
       ),
       rightArea: (
         <Box sx={{
-          display: 'flex', alignItems: 'center', gap: { xs: 0, sm: 2 },
-          [theme.breakpoints.down(layoutQuery)]: { display: 'none' }
-        }}>
+          display: 'flex', alignItems: 'center',
+          gap: { xs: 0, sm: 2 },
 
-          <RenderIcons />
+        }}>
+          <Box sx={{
+            display: 'flex',
+            gap: { xs: 0, sm: 2 },
+            [theme.breakpoints.down(layoutQuery)]: { display: 'none' }
+          }}>
+            <RenderIcons />
+          </Box>
 
           {/** @slot Account drawer */}
-          <AccountDrawer data={_account} sx={{
-            backgroundColor: '#00579F',
-            borderRadius: '50%',
-            padding: '12px',
-            width: '50px',
-            height: '50px'
-          }} />
+          <AccountDrawer
+            data={_account}
+            sx={{
+              backgroundColor: '#00579F',
+              borderRadius: '50%',
+              padding: '12px',
+              width: '50px',
+              height: '50px'
+            }} />
         </Box>
       ),
     };
@@ -185,7 +190,7 @@ export function DashboardLayout({
       layoutQuery={layoutQuery}
       cssVars={navVars.section}
       sx={{
-        padding: isNavMini ? '10px' : '25px'
+        padding: isNavMini ? '0px 10px 10px' : '0px 25px 25px'
       }}
       onToggleNav={() => {
 
@@ -241,8 +246,9 @@ export function DashboardLayout({
               }),
             },
           },
-          width: '100%'
-
+          width: '100%',
+          px: 1,
+          py: 1
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

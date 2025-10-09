@@ -21,6 +21,7 @@ import Link from '@mui/material/Link';
 import { RouterLink } from '../../shared/routes';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useTranslate } from '../../../locales';
 
 // ----------------------------------------------------------------------
 
@@ -40,8 +41,7 @@ export const SignInSchema = zod.object({
 
 export function JwtSignInView() {
     const router = useRouter();
-
-    // const showPassword = useBoolean();
+    const { t } = useTranslate()
     const [showPassword, setShowPassword] = useState<boolean>(true)
     const { checkUserSession } = useAuthContext();
 
@@ -79,7 +79,7 @@ export function JwtSignInView() {
         <Box sx={{ gap: 2, display: 'flex', flexDirection: 'column' }}>
             <Field.Text
                 name="username"
-                label='Username'
+                label={t('username')}
                 size='small'
 
                 sx={{
@@ -120,7 +120,8 @@ export function JwtSignInView() {
             <Box sx={{ gap: 1.5, display: 'flex', flexDirection: 'column' }}>
                 <Field.Text
                     name="password"
-                    label="Password"
+                    label={t('password')}
+
                     type={showPassword ? 'text' : 'password'}
                     variant='filled'
                     size='small'
@@ -168,14 +169,14 @@ export function JwtSignInView() {
             <Box sx={{ gap: 1.5, display: 'flex', justifyContent: "space-between", alignItems: 'center' }}>
 
 
-                <FormControlLabel control={<Checkbox size='small' sx={{ outlineOffset: 2, }} />} label="Remember me" sx={{ color: "#6c6c81" }} />
+                <FormControlLabel control={<Checkbox size='small' sx={{ outlineOffset: 2, }} />} label={t('remember')} sx={{ color: "#6c6c81" }} />
                 <Link
                     component={RouterLink}
                     href="#"
                     variant='body1'
                     sx={{ textDecoration: "none", color: "#6c6c81", fontSize: "16px" }}
                 >
-                    Forgot password
+                    {t('forgotPassword')}
                 </Link>
             </Box>
             <Box sx={{ gap: 3, display: 'flex', justifyContent: "space-between", alignItems: 'center', mt: 3 }}>
@@ -187,7 +188,8 @@ export function JwtSignInView() {
                     loadingIndicator="Register..."
                     sx={{ borderColor: "#3b86ff", color: "#3b86ff", borderRadius: 2, boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px" }}
                 >
-                    Register
+
+                    {t('register')}
                 </Button>
                 <Button
                     fullWidth
@@ -200,7 +202,7 @@ export function JwtSignInView() {
                     sx={{ backgroundColor: "#3b86ff", borderRadius: 2, boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px" }}
 
                 >
-                    Login
+                    {t('login')}
                 </Button>
             </Box>
 
@@ -209,7 +211,7 @@ export function JwtSignInView() {
 
     return (
         <>
-            <FormHead icon={<img src={`${CONFIG.assetsDir}/assets/login/logo-text.png`} width={250} />} title={'Welcom back! Please login to your account'} sx={{ textAlign: { xs: 'center' } }} />
+            <FormHead icon={<img src={`${CONFIG.assetsDir}/assets/login/logo-text.png`} width={250} />} title={t('welcome')} sx={{ textAlign: { xs: 'center' } }} />
             {!!errorMessage && (
                 <Alert severity="error" sx={{ mb: 3 }}>
                     {errorMessage}
